@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Nandini 🌙💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#200122,#6f0000);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:white;
+}
+/* Card */
+.card{
+  width:92%;
+  max-width:390px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(14px);
+  border-radius:26px;
+  padding:26px;
+  text-align:center;
+  box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  z-index:2;
+}
+h1{color:#ffd6e0;font-size:2rem;}
+h2{margin:8px 0 14px;font-weight:500;}
+#typedText{
+  font-size:0.95rem;
+  line-height:1.6;
+  min-height:160px;
+  color:#f5f5f5;
+  white-space:pre-line;
+}
+/* Divider */
+hr{
+  border:0;
+  height:1px;
+  background:rgba(255,255,255,0.3);
+  margin:16px 0;
+  border-radius:4px;
+}
+/* Slideshow */
+.slideshow{
+  margin:18px auto;
+  height:200px;
+  border-radius:18px;
+  overflow:hidden;
+}
+.slideshow img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+.slideshow img.active{
+  display:block;
+  animation:fade 1.5s;
+}
+/* Button & Gift */
+button{
+  margin-top:14px;
+  padding:10px 22px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:0.95rem;
+  cursor:pointer;
+}
+button:hover{background:#ff758f;}
+.gift{
+  display:none;
+  margin-top:16px;
+}
+.heart{
+  font-size:2rem;
+  margin-top:10px;
+  animation:beat 1s infinite;
+}
+/* Animations */
+@keyframes beat{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
+/* Rose petals */
+.petal{
+  position:absolute;
+  top:-10px;
+  width:18px;
+  height:18px;
+  background:radial-gradient(circle at 30% 30%,#ffb3c1,#c9184a);
+  border-radius:0 50% 50% 50%;
+  transform:rotate(45deg);
+  animation:fall linear infinite;
+  opacity:0.9;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
+</audio>
+
+<div class="card">
+  <h1>Happy Birthday 🎂</h1>
+  <h2>Nandini 🌙💖</h2>
+
+  <!-- Typed Love Letter -->
+  <div id="typedText"></div>
+
+  <!-- Divider -->
+  <hr>
+
+  <!-- Slideshow -->
+  <div class="slideshow">
+    <img src="photo1.jpg" class="active">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+  </div>
+
+  <!-- Gift Button -->
+  <button id="giftBtn">Tap to Unlock Your Gift 🎁</button>
+
+  <!-- Gift Reveal -->
+  <div class="gift" id="gift">
+    <p>
+      Tum meri life mein aayi…<br>
+      aur phir dheere se chali gayi.<br><br>
+      Jo bhi tha, shayad main tumhare liye<br>
+      utna achha nahi kar paaya.<br><br>
+      Par tumne jo bhi kiya, jo bhi diya,<br>
+      uske liye main hamesha dil se thankful rahunga —<br>
+      hamesha, achhe tareeke se.<br><br>
+      Bas ek hi baat kehni hai…<br>
+      khush rehna yaar. Hamesha.
+    </p>
+    <div class="heart">❤️</div>
+  </div>
+</div>
+
+<script>
+/* Typed Love Letter */
+const text = `Tum meri life mein aayi…
+aur phir dheere se chali gayi.
+
+Jo bhi tha, shayad
+main tumhare liye
+utna achha nahi kar paaya.
+
+Par tumne jo bhi kiya,
+jo bhi diya,
+uske liye main hamesha
+dil se thankful rahunga —
+hamesha, achhe tareeke se.
+
+Bas ek hi baat kehni hai…
+khush rehna yaar. Hamesha.`;
+
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typedText").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,40);
+  }
+}
+type();
+
+/* Slideshow */
+let slides=document.querySelectorAll(".slideshow img");
+let idx=0;
+setInterval(()=>{
+  slides[idx].classList.remove("active");
+  idx=(idx+1)%slides.length;
+  slides[idx].classList.add("active");
+},3000);
+
+/* Gift Unlock with Tap */
+let giftUnlocked=false;
+const giftBtn=document.getElementById("giftBtn");
+giftBtn.addEventListener("click", ()=>{
+  if(!giftUnlocked){
+    document.getElementById("gift").style.display="block";
+    giftUnlocked=true;
+    setTimeout(fadeOutCard,5000);
+  }
+});
+
+/* Fade-Out Card */
+function fadeOutCard(){
+  const card=document.querySelector(".card");
+  card.style.transition="opacity 2s";
+  card.style.opacity=0;
+  setTimeout(()=>{card.style.display="none";},2000);
+}
+
+/* Rose Petals */
+for(let p=0;p<40;p++){
+  let petal=document.createElement("div");
+  petal.className="petal";
+  petal.style.left=Math.random()*100+"vw";
+  petal.style.animationDuration=(Math.random()*4+6)+"s";
+  petal.style.opacity=Math.random();
+  document.body.appendChild(petal);
+}
+</script>
+
+</body>
+</html>
